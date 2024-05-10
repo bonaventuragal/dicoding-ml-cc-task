@@ -1,4 +1,4 @@
-import { Controller, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Controller, Get, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { PredictService } from './predict.service';
 import { FileInterceptor } from '@nestjs/platform-express';
 
@@ -14,6 +14,16 @@ export class PredictController {
     return {
       status: "success",
       message: "Model is predicted successfully",
+      data
+    }
+  }
+
+  @Get('/histories')
+  async histories() {
+    const data = await this.predictService.histories()
+
+    return {
+      status: "success",
       data
     }
   }
